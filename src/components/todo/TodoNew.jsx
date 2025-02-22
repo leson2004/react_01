@@ -1,8 +1,10 @@
-const TodoNew = () => {
+const TodoNew = (props) => {
+  var { newFunction } = props;
+  var name = "Le Van Son";
   return (
     <div className="todo_new">
       <input type="text" />
-      <button>add</button>
+      <button onClick={newFunction(name)}>add</button>
     </div>
   );
 };
