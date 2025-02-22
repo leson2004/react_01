@@ -1,0 +1,51 @@
+.todo_container {
+  text-align: center;
+}
+.todo_title {
+  color: coral;
+  font-size: 50px;
+}
+.todo_new input {
+  background-color: gainsboro;
+  border: 0px;
+}
+.todo_new button {
+  background-color: aquamarine;
+  margin-left: 10px;
+  border: 0px;
+}
+.todo_data {
+  margin-top: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
