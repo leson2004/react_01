@@ -17,7 +17,15 @@ function App() {
     cost: 50,
   };
   var newFunction = (name) => {
-    alert(`xin chao :${name} `);
+    const newTodo = {
+      id: randomIntFormInterval(0, 10000),
+      name: name,
+    };
+    return setTodoList([...todoList, newTodo]);
+    //alert(`ten cua ban la :${name}`);
+  };
+  const randomIntFormInterval = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1) + min);
   };
   return (
     <>

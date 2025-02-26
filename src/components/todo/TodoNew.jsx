@@ -10,7 +10,9 @@ const TodoNew = (props) => {
     setValue(name);
   };
   const handleClick = () => {
-    console.log("--------value_check:", currentValue);
+    newFunction(currentValue);
+    //console.log(currentValue);
+    // newFunction(data);
   };
   return (
     <>
@@ -22,13 +24,7 @@ const TodoNew = (props) => {
             handleOnChange(data.target.value);
           }}
         />
-        <button
-          onClick={(data) => {
-            handleClick(data.target.value);
-          }}
-        >
-          add
-        </button>
+        <button onClick={handleClick}>add</button>
       </div>
       <div>ten cua ban la :{currentValue}</div>
     </>
