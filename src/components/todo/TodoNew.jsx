@@ -11,18 +11,21 @@ const TodoNew = (props) => {
   };
   const handleClick = () => {
     newFunction(currentValue);
+    setValue("");
     //console.log(currentValue);
     // newFunction(data);
   };
   return (
     <>
-      {" "}
       <div className="todo_new">
         <input
           type="text"
           onChange={(data) => {
+            //console.log("value:", data.target.value);
             handleOnChange(data.target.value);
-          }}
+          }} // mỗi lần onchange setValue sẽ được gọi , tên sẽ đc cập nhật , value sẽ được gán với tên vừa cập nhật .
+          // sau đó nhấn button add , thì sẽ update tên rỗng ,
+          value={currentValue}
         />
         <button onClick={handleClick}>add</button>
       </div>

@@ -49,3 +49,7 @@
     animation: logo-spin infinite 20s linear;
   }
 }
+.todo_data_new {
+  display: flex;
+  justify-content: space-between;
+}
