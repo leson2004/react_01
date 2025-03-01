@@ -2,6 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import LoginPage from "./pages/login.jsx";
+import RegisterPage from "./pages/register.jsx";
+import UsersPage from "./pages/users.jsx";
+import ProjectPage from "./pages/project.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -9,19 +13,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <h1> login page</h1>,
+    element: <LoginPage />,
   },
   {
     path: "/register",
-    element: <h1> register page</h1>,
+    element: <RegisterPage />,
   },
   {
     path: "/users",
-    element: <h1>users page</h1>,
+    element: <UsersPage />,
   },
   {
-    path: "/products",
-    element: <h1>product page</h1>,
+    path: "/project",
+    element: <ProjectPage />,
   },
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
