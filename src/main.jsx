@@ -6,10 +6,32 @@ import LoginPage from "./pages/login.jsx";
 import RegisterPage from "./pages/register.jsx";
 import UsersPage from "./pages/users.jsx";
 import ProjectPage from "./pages/project.jsx";
+import TodoApp from "./components/todo/TodoApp.jsx";
+//import Header from "./components/header/header.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <>
+        <App />
+      </>
+    ),
+    children: [
+      {
+        index: true,
+        element: <TodoApp />,
+      },
+
+      {
+        path: "/users",
+        element: <UsersPage />,
+      },
+      {
+        path: "/project",
+        element: <ProjectPage />,
+      },
+    ],
   },
   {
     path: "/login",
@@ -18,14 +40,6 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <RegisterPage />,
-  },
-  {
-    path: "/users",
-    element: <UsersPage />,
-  },
-  {
-    path: "/project",
-    element: <ProjectPage />,
   },
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
