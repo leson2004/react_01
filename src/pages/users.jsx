@@ -1,4 +1,14 @@
+//import UserTable from "../components/user/user.table";
+
+import UserTable from "../components/user/user.table";
+import UserForm from "../components/user/user.form";
+
 const UsersPage = () => {
-  return <h1>users page</h1>;
+  return (
+    <div>
+      <UserForm />
+      <UserTable />
+    </div>
+  );
 };
 export default UsersPage;

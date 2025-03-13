@@ -7,6 +7,7 @@ import RegisterPage from "./pages/register.jsx";
 import UsersPage from "./pages/users.jsx";
 import ProjectPage from "./pages/project.jsx";
 import TodoApp from "./components/todo/TodoApp.jsx";
+import ErrorPage from "./components/layout/error_page.jsx";
 //import Header from "./components/header/header.jsx";
 
 const router = createBrowserRouter([
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
         <App />
       </>
     ),
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -24,14 +26,15 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/users",
-        element: <UsersPage />,
-      },
-      {
         path: "/project",
         element: <ProjectPage />,
       },
     ],
+  },
+
+  {
+    path: "/users",
+    element: <UsersPage />,
   },
   {
     path: "/login",
