@@ -1,11 +1,15 @@
 import { Space, Table, Tag } from "antd";
 import { fetchAllUserAPI } from "../../services/api.service";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const UserTable = () => {
   const [addUserData, setUserData] = useState([
-    { _id: "1", name: "son", age: 18, address: "thanh hóa " },
+    { _id: "1", fullName: "son", email: "a@gmail.com" },
   ]);
+  useEffect(() => {
+    console.log("------------check useeffect");
+    loadUser();
+  }, []);
   const columns = [
     {
       title: "ID",
@@ -13,34 +17,35 @@ const UserTable = () => {
     },
     {
       title: "Name",
-      dataIndex: "name",
-      key: "name",
-      render: (text) => <a>{text}</a>,
+      dataIndex: "fullName",
+      // key: "name",
+      // render: (text) => <a>{text}</a>,
     },
     {
-      title: "Age",
-      dataIndex: "age",
-      key: "age",
+      title: "Email",
+      dataIndex: "email",
+      //key: "age",
     },
-    {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
-    },
-    {
-      title: "Son",
-      key: "tags",
-      dataIndex: "tags",
-    },
+    // {
+    //   title: "Address",
+    //   dataIndex: "address",
+    //   key: "address",
+    // },
+    // {
+    //   title: "Son",
+    //   key: "tags",
+    //   dataIndex: "tags",
+    // },
   ];
 
-  const loadUser = () => {
-    console.log("start");
-    const res = fetchAllUserAPI();
+  const loadUser = async () => {
+    // console.log("start");
+    const res = await fetchAllUserAPI();
     setUserData(res.data);
     console.log("end", res);
   };
-  loadUser();
+
+  console.log("check 00000");
   return <Table columns={columns} dataSource={addUserData} rowKey={"_id"} />;
 };
 export default UserTable;
