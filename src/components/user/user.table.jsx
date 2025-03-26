@@ -3,11 +3,9 @@ import { fetchAllUserAPI } from "../../services/api.service";
 import { useEffect, useState } from "react";
 
 const UserTable = () => {
-  const [addUserData, setUserData] = useState([
-    { _id: "1", fullName: "son", email: "a@gmail.com" },
-  ]);
+  const [addUserData, setUserData] = useState([]);
   useEffect(() => {
-    console.log("------------check useeffect");
+    //console.log("------------check useeffect");
     loadUser();
   }, []);
   const columns = [
@@ -18,24 +16,11 @@ const UserTable = () => {
     {
       title: "Name",
       dataIndex: "fullName",
-      // key: "name",
-      // render: (text) => <a>{text}</a>,
     },
     {
       title: "Email",
       dataIndex: "email",
-      //key: "age",
     },
-    // {
-    //   title: "Address",
-    //   dataIndex: "address",
-    //   key: "address",
-    // },
-    // {
-    //   title: "Son",
-    //   key: "tags",
-    //   dataIndex: "tags",
-    // },
   ];
 
   const loadUser = async () => {
