@@ -2,13 +2,15 @@ import { useEffect } from "react";
 import { Drawer, Button, Flex } from "antd";
 import { useState } from "react";
 import FormList from "antd/es/form/FormList";
+import { NodeCollapseOutlined } from "@ant-design/icons";
 const ViewUser = (props) => {
   const { open, setOpen, viewUser } = props;
   const [id, setID] = useState("");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
-
   const [phone, setPhoneNumber] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [preview, setPreview] = useState(null);
   console.log("check view", viewUser);
   useEffect(() => {
     setID(viewUser._id);
@@ -16,6 +18,20 @@ const ViewUser = (props) => {
     setEmail(viewUser.email);
     setPhoneNumber(viewUser.phone);
   }, [viewUser]);
+  const handleClickFile = (event) => {
+    if (!event.target.files || event.target.files.length === 0) {
+      setSelectedFile(null);
+      setPreview(null);
+      return;
+    }
+    const file = event.target.files[0];
+
+    if (file) {
+      setSelectedFile(file);
+      setPreview(URL.createObjectURL(file));
+    }
+  };
+  console.log("check preview:", preview);
   return (
     <>
       <Drawer
@@ -40,13 +56,19 @@ const ViewUser = (props) => {
           <p>Email :{email} </p>
           <p>Phone :{phone} </p>
         </div>
-        <div>
+        <div
+          style={{
+            height: "150px",
+            width: "200px",
+            marginTop: "10px",
+            border: "1px solid #ccc",
+          }}
+        >
           <img
             src={`${import.meta.env.VITE_BACKEND_URL}/images/avatar/${
               viewUser.avatar
             }`}
-            height={200}
-            width={250}
+            style={{ height: "100%", width: "100%", objectfit: "contain" }}
           />
         </div>
         <div>
@@ -64,8 +86,33 @@ const ViewUser = (props) => {
           >
             Upload Image
           </label>
-          <input type="file" id="upload" hidden />
+          <input
+            type="file"
+            id="upload"
+            hidden
+            onChange={(event) => {
+              handleClickFile(event);
+            }}
+          />
         </div>
+
+        <>
+          {preview && (
+            <div
+              style={{
+                height: "150px",
+                width: "200px",
+                marginTop: "10px",
+                border: "1px solid #ccc",
+              }}
+            >
+              <img
+                src={`${preview}`}
+                style={{ height: "100%", width: "100%", objectfit: "contain" }}
+              />
+            </div>
+          )}
+        </>
       </Drawer>
     </>
   );
