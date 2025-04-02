@@ -57,27 +57,37 @@ const UserForm = (props) => {
           handleClickBtn();
         }}
         onCancel={() => {
-          setIsModalOpen(false);
+          resetAndCloseModel();
         }}
         okText="CREATE"
       >
         <div>
           <span>Full Name</span>
-          <Input onChange={(event) => setFullName(event.target.value)} />
+          <Input
+            value={fullName}
+            onChange={(event) => setFullName(event.target.value)}
+          />
         </div>
         <div>
           <span>Email</span>
-          <Input onChange={(event) => setEmail(event.target.value)} />
+          <Input
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+          />
         </div>
         <div>
           <span>Pass Word </span>
           <Input.Password
+            value={password}
             onChange={(event) => setPassWord(event.target.value)}
           />
         </div>
         <div>
           <span>Phone Number </span>
-          <Input onChange={(event) => setPhoneNumber(event.target.value)} />
+          <Input
+            value={phone}
+            onChange={(event) => setPhoneNumber(event.target.value)}
+          />
         </div>
       </Modal>
     </div>

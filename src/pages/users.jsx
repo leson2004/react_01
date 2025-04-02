@@ -13,10 +13,11 @@ const UsersPage = () => {
     const res = await fetchAllUserAPI();
     setUserData(res.data);
   };
+
   return (
     <div>
       <UserForm loadUser={loadUser} />
-      <UserTable addUserData={addUserData} />
+      <UserTable addUserData={addUserData} loadUser={loadUser} />
     </div>
   );
 };
