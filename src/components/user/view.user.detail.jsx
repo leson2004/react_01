@@ -1,6 +1,7 @@
 import { useEffect } from "react";
-import { Drawer } from "antd";
+import { Drawer, Button, Flex } from "antd";
 import { useState } from "react";
+import FormList from "antd/es/form/FormList";
 const ViewUser = (props) => {
   const { open, setOpen, viewUser } = props;
   const [id, setID] = useState("");
@@ -33,10 +34,38 @@ const ViewUser = (props) => {
         > */}
         {/* Reload
         </Button> */}
-        <p>ID : {id}</p>
-        <p>FullName :{fullName} </p>
-        <p>Email :{email} </p>
-        <p>Phone :{phone} </p>
+        <div>
+          <p>ID : {id}</p>
+          <p>FullName :{fullName} </p>
+          <p>Email :{email} </p>
+          <p>Phone :{phone} </p>
+        </div>
+        <div>
+          <img
+            src={`${import.meta.env.VITE_BACKEND_URL}/images/avatar/${
+              viewUser.avatar
+            }`}
+            height={200}
+            width={250}
+          />
+        </div>
+        <div>
+          <label
+            htmlFor="upload"
+            style={{
+              display: "Flex",
+              width: "fit-content",
+              marginTop: "10px",
+              padding: "3px 7px",
+              background: "orange",
+              borderRadius: "3px",
+              cursor: "pointer",
+            }}
+          >
+            Upload Image
+          </label>
+          <input type="file" id="upload" hidden />
+        </div>
       </Drawer>
     </>
   );
