@@ -74,7 +74,12 @@ const UserTable = (props) => {
         isUpdateUserValue={isUpdateUserValue}
         loadUser={loadUser}
       />
-      <ViewUser setOpen={setOpen} open={open} viewUser={viewUser} />
+      <ViewUser
+        setOpen={setOpen}
+        open={open}
+        viewUser={viewUser}
+        loadUser={loadUser}
+      />
       <DeleteUser
         isOpenPopConFirm={isOpenPopConFirm}
         deleteUser={deleteUser}

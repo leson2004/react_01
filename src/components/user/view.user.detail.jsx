@@ -1,17 +1,21 @@
 import { useEffect } from "react";
-import { Drawer, Button, Flex } from "antd";
+import { Button, Drawer, Flex, notification } from "antd";
 import { useState } from "react";
 import FormList from "antd/es/form/FormList";
 import { NodeCollapseOutlined } from "@ant-design/icons";
+import {
+  handleUploadFileAvatar,
+  updateAvatar,
+} from "../../services/api.service";
 const ViewUser = (props) => {
-  const { open, setOpen, viewUser } = props;
+  const { open, setOpen, viewUser, loadUser } = props;
   const [id, setID] = useState("");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhoneNumber] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [preview, setPreview] = useState(null);
-  console.log("check view", viewUser);
+  //console.log("check view", viewUser);
   useEffect(() => {
     setID(viewUser._id);
     setFullName(viewUser.fullName);
@@ -31,7 +35,44 @@ const ViewUser = (props) => {
       setPreview(URL.createObjectURL(file));
     }
   };
-  console.log("check preview:", preview);
+
+  const handleUploadFile = async () => {
+    const resUpload = await handleUploadFileAvatar(selectedFile, "avatar");
+
+    if (resUpload.data) {
+      const resUpdateAvatar = await updateAvatar(
+        viewUser._id,
+        viewUser.fullName,
+        viewUser.phone,
+        resUpload.data.fileUploaded
+      );
+      if (resUpdateAvatar.data) {
+        notification.success({
+          message: "Update avatar ",
+          description: "cập nhật avatar thành công ",
+        });
+        closePreView();
+        loadUser();
+      } else {
+        notification.error({
+          message: "Update avatar",
+          description: JSON.stringify(resUpdateAvatar.message),
+        });
+      }
+    } else {
+      //false
+      notification.error({
+        message: "Upload user ",
+        description: JSON.stringify(resUpload.message),
+      });
+    }
+  };
+  const closePreView = () => {
+    setOpen(false);
+    setSelectedFile(null);
+    setPreview(null);
+  };
+
   return (
     <>
       <Drawer
@@ -96,23 +137,35 @@ const ViewUser = (props) => {
           />
         </div>
 
-        <>
-          {preview && (
+        {preview && (
+          <>
             <div
               style={{
                 height: "150px",
                 width: "200px",
                 marginTop: "10px",
                 border: "1px solid #ccc",
+                marginBottom: "10px",
               }}
             >
               <img
                 src={`${preview}`}
-                style={{ height: "100%", width: "100%", objectfit: "contain" }}
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  objectfit: "contain",
+                }}
               />
             </div>
-          )}
-        </>
+            <Button
+              onClick={() => {
+                handleUploadFile();
+              }}
+            >
+              SAVE
+            </Button>
+          </>
+        )}
       </Drawer>
     </>
   );
