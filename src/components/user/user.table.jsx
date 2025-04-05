@@ -1,12 +1,21 @@
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Space, Table } from "antd";
+import { Space, Table, Pagination } from "antd";
 import { useState } from "react";
 import UserUpdate from "./user.update";
 import ViewUser from "./view.user.detail";
 import DeleteUser from "./delete.user";
 
 const UserTable = (props) => {
-  const { addUserData, loadUser } = props;
+  const {
+    addUserData,
+    loadUser,
+    current,
+    pageSize,
+    total,
+    setCurrent,
+    setPageSize,
+    setTotal,
+  } = props;
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [isUpdateUserValue, setIsUpdateUserValue] = useState(null);
   const [open, setOpen] = useState(false);
@@ -15,6 +24,12 @@ const UserTable = (props) => {
   const [isOpenPopConFirm, setIsOpenPopConFirm] = useState(false);
 
   const columns = [
+    {
+      title: "STT",
+      render: (_, record, index) => {
+        return <>{index + 1 + (current - 1) * pageSize}</>;
+      },
+    },
     {
       title: "ID",
       dataIndex: "_id",
@@ -64,10 +79,43 @@ const UserTable = (props) => {
       ),
     },
   ];
-
+  const onChange = (pagination, filters, sorter, extra) => {
+    if (pagination && pagination.current) {
+      if (+pagination.current != +current) {
+        setCurrent(+pagination.current);
+      }
+    }
+    if (pagination && pagination.current) {
+      if (+pagination.pageSize != +pageSize) {
+        setPageSize(+pagination.pageSize);
+      }
+    }
+    console.log("check________", { pagination, filters, sorter, extra });
+  };
   return (
     <>
-      <Table columns={columns} dataSource={addUserData} rowKey={"_id"} />
+      <Table
+        columns={columns}
+        dataSource={addUserData}
+        rowKey={"_id"}
+        pagination={{
+          current: current,
+          pageSize: pageSize,
+          showSizeChanger: true,
+          total: total,
+
+          showTotal: (total, range) => {
+            return (
+              <div>
+                {" "}
+                {range[0]}-{range[1]} trên {total} rows
+              </div>
+            );
+          },
+        }}
+        onChange={onChange}
+      />
+
       <UserUpdate
         isUpdateModalOpen={isUpdateModalOpen}
         setIsUpdateModalOpen={setIsUpdateModalOpen}
