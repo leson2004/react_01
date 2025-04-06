@@ -1,4 +1,4 @@
-import { Input, Button, Form, notification } from "antd";
+import { Input, Button, Form, notification, Row, Col } from "antd";
 import { createRegisterUser } from "../services/api.service";
 import { useNavigate } from "react-router";
 const RegisterPage = () => {
@@ -41,51 +41,76 @@ const RegisterPage = () => {
         // onFinishFailed={onFinishFailed}
         // autoComplete="off"
       >
-        <Form.Item
-          label="FullName"
-          name="fullName"
-          rules={[{ required: true, message: "Please input your username!" }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="Email"
-          name="email"
-          rules={[{ required: true, message: "Please input your username!" }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="PassWord"
-          name="password"
-          rules={[{ required: true, message: "Please input your username!" }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="Phone"
-          name="phone"
-          rules={[
-            {
-              required: true,
-              //type: "regexp",
-              pattern: new RegExp(/\d+/g),
-              message: "Wrong format!",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
+        <Row justify={"center"}>
+          <Col xs={24} md={6}>
+            <Form.Item
+              label="FullName"
+              name="fullName"
+              rules={[
+                { required: true, message: "Please input your username!" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row justify={"center"}>
+          <Col xs={24} md={6}>
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[
+                { required: true, message: "Please input your username!" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row justify={"center"}>
+          <Col xs={24} md={6}>
+            <Form.Item
+              label="PassWord"
+              name="password"
+              rules={[
+                { required: true, message: "Please input your username!" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row justify={"center"}>
+          <Col xs={24} md={6}>
+            <Form.Item
+              label="Phone"
+              name="phone"
+              rules={[
+                {
+                  required: true,
+                  //type: "regexp",
+                  pattern: new RegExp(/\d+/g),
+                  message: "Wrong format!",
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+        </Row>
         {/* <button type="submit">Register</button> trong  1 form co name / id , khi submit được kích hoạt sẽ gửi dữ liệu đi */}
-
-        <Button
-          type="primary"
-          onClick={() => {
-            form.submit();
-          }}
-        >
-          Register
-        </Button>
+        <Row justify={"center"}>
+          <Col xs={24} md={6}>
+            <Button
+              type="primary"
+              onClick={() => {
+                form.submit();
+              }}
+            >
+              Register
+            </Button>
+          </Col>
+        </Row>
       </Form>
     </div>
   );
