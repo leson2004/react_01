@@ -1,16 +1,30 @@
-import React from "react";
-import { Form, Input, Button, Typography } from "antd";
-
+import React, { useState } from "react";
+import { Form, Input, Button, Typography, message, notification } from "antd";
+import { loginAPI } from "../services/api.service";
+import { useNavigate } from "react-router";
 const { Link, Text } = Typography;
 
 const LoginPage = () => {
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const onFinish = async (values) => {
+    setLoading(true);
+    const res = await loginAPI(values.email, values.password);
+    if (res.data) {
+      message.success("đăng nhập thành công ");
+      navigate("/");
+    } else {
+      notification.error({
+        message: "Error login",
+        description: JSON.stringify(res.message),
+      });
+    }
+    setLoading(false);
   };
 
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
+  // const onFinishFailed = (errorInfo) => {
+  //   console.log("Failed:", errorInfo);
+  // };
 
   return (
     <div
@@ -27,7 +41,7 @@ const LoginPage = () => {
         layout="vertical"
         initialValues={{ remember: true }}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
+        //onFinishFailed={onFinishFailed}
       >
         <Form.Item
           label="Email"
@@ -46,7 +60,7 @@ const LoginPage = () => {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" block>
+          <Button type="primary" htmlType="submit" block loading={loading}>
             Login
           </Button>
         </Form.Item>

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 const RegisterPage = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
+
   const onFinish = async (events) => {
     const res = await createRegisterUser(
       // phải luôn nhớ await
