@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Form, Input, Button, Typography, message, notification } from "antd";
 import { loginAPI } from "../services/api.service";
 import { useNavigate } from "react-router";
+import { AuthContext } from "../components/context/auth.context";
+
 const { Link, Text } = Typography;
 
 const LoginPage = () => {
+  const { setUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const onFinish = async (values) => {
@@ -12,6 +15,8 @@ const LoginPage = () => {
     const res = await loginAPI(values.email, values.password);
     if (res.data) {
       message.success("đăng nhập thành công ");
+      localStorage.setItem("access_token", res.data.access_token);
+      setUser(res.data.user);
       navigate("/");
     } else {
       notification.error({

@@ -28,6 +28,7 @@ const ViewUser = (props) => {
       setPreview(null);
       return;
     }
+
     const file = event.target.files[0];
 
     if (file) {

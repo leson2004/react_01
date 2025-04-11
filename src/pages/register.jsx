@@ -25,7 +25,7 @@ const RegisterPage = () => {
         description: JSON.stringify(res.message),
       });
     }
-    console.log("check finish", events);
+    //console.log("check finish", events);
   };
   // add user từ register , và thử lấy các giá trị mà chưa cần submit
   return (
